@@ -1,11 +1,8 @@
 name    'footballradar-python'
 version '0.1.0'
-source 'UNKNOWN'
+source 'https://github.com/footballradar/puppet-python'
 author 'footballradar'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
-
-## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+summary 'Provides Python and Python development packages'
+description 'Provides Python and Python development packages'
+project_page 'https://github.com/footballradar/puppet-python'
