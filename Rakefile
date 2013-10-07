@@ -17,7 +17,7 @@ task :default => [:test]
 PuppetLint.configuration.disable_class_inherits_from_params_class
 PuppetLint.configuration.ignore_paths = FileList[
   '**/fixtures/modules/**/**',
-  'vendor/**',
+  'vendor/**/**',
   ]
 
 # jenkins has a diff build dir name
