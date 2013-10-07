@@ -15,7 +15,11 @@ task :tdefault => :texclude
 task :default => [:test]
 
 PuppetLint.configuration.disable_class_inherits_from_params_class
-PuppetLint.configuration.ignore_paths = FileList['**/fixtures/modules/**/**']
+PuppetLint.configuration.ignore_paths = FileList[
+  '**/fixtures/modules/**/**',
+  'vendor/**',
+  ]
+
 # jenkins has a diff build dir name
 if (ENV['BUILD_TAG'] && (ENV['BUILD_TAG'].include? "jenkins"))
   PuppetLint.configuration.disable_autoloader_layout
