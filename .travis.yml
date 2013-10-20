@@ -13,4 +13,5 @@ before_script:
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 script:
+  - bundle install
   - rake -t test
