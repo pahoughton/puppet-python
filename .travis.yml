@@ -1,10 +1,17 @@
-language: ruby
+language: c
 notifications:
   email:
     - paul4hough@gmail.com
 
+install:
+  - sudo apt-get update
+  - sudo apt-get install ruby-full
+  - gem install bundler
+  
 before_script:
   - echo -e "Host heroku.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
-script: "bundle exec rake -t test"
+script:
+  - bundle install
+  - rake -t test
