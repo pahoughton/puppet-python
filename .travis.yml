@@ -6,6 +6,7 @@ notifications:
 install:
   - sudo apt-get update
   - sudo apt-get install ruby-full
+  - gem install bundler
   
 before_script:
   - echo -e "Host heroku.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
