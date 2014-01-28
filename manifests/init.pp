@@ -48,6 +48,7 @@ class python {
           mirrorlist  => 'http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist',
           enabled     => 1,
           gpgcheck    => 1,
+          includepkgs => 'py*',
           gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias',
         }
         $provider = undef
