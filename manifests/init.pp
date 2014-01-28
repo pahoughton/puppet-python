@@ -69,7 +69,7 @@ class python {
     default: {
       fail("\"${module_name}\" does not supoort osfamily: \"${::osfamily}\"")
     }
-  }
+  }->
   package { $py_packages :
     ensure    => installed,
     provider  => $provider
