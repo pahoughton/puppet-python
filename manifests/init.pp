@@ -70,12 +70,12 @@ class python {
         }
         exec { 'install centos pip-3.3' :
           command => '/usr/bin/env curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python3',
-          creates => '/usr/bin/pip-3.3',
+          creates => '/usr/bin/pip3.3',
           require => Package['python3-setuptools'],
         }->
         file { '/usr/bin/pip3' :
           ensure => 'link',
-          target => '/usr/bin/pip-3.3'
+          target => '/usr/bin/pip3.3'
         }
       } else {
         $provider = undef
