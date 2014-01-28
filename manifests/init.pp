@@ -138,32 +138,22 @@ class python {
       }
     }
     default : {
-      case $::osfamily {
-        'Darwin': {
-          file { '/usr/bin/python' :
-            ensure => 'link',
-            target => '/opt/local/bin/python2.7'
-          }
-          file { '/usr/bin/pip' :
-            ensure => 'link',
-            target => '/opt/local/bin/pip-2.7'
-          }
-          file { '/usr/bin/python3' :
-            ensure => 'link',
-            target => '/opt/local/bin/python3.3'
-          }
-          file { '/usr/bin/pip3' :
-            ensure => 'link',
-            target => '/opt/local/bin/pip-3.3'
-          }
+      if $::osfamily ==  'Darwin': {
+        file { '/usr/bin/python' :
+          ensure => 'link',
+          target => '/opt/local/bin/python2.7'
         }
-        default : {
-          file { ['/usr/bin/python',
-                  '/usr/bin/pip',
-                  '/usr/bin/python3',
-                  '/usr/bin/pip3' ] :
-            ensure => 'present',
-          }
+        file { '/usr/bin/pip' :
+          ensure => 'link',
+          target => '/opt/local/bin/pip-2.7'
+        }
+        file { '/usr/bin/python3' :
+          ensure => 'link',
+          target => '/opt/local/bin/python3.3'
+        }
+        file { '/usr/bin/pip3' :
+          ensure => 'link',
+          target => '/opt/local/bin/pip-3.3'
         }
       }
     }
