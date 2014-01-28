@@ -38,12 +38,33 @@ class python {
       }
     }
     'RedHat':{
-      $provider = undef
-      $py_packages = ['python27',
-                      'py27-pip',
-                      'python33',
-                      'py33-pip',
-                      ]
+      if $::operatingsystem == 'CentOS' {
+        notice { 'Installing from PUIAS Repo' : }
+        file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puias' :
+          source => 'puppet:///python/RPM-GPG-KEY-puias',
+        }->
+        yumrepo { 'puias' :
+          name        => 'PUIAS repo $releasever',
+          mirrorlist  => 'http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist',
+          enabled     => 1,
+          gpgcheck    => 1,
+          includepkgs => 'emacs',
+          gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias',
+        }
+        $provider = undef
+        $py_packages = ['python27',
+                        'python27-tools',
+                        'python3',
+                        'python3-tools',
+                        ]
+      } else {
+        $provider = undef
+        $py_packages = ['python27',
+                        'py27-pip',
+                        'python33',
+                        'py33-pip',
+                        ]
+      }
     }
     default: {
       fail("\"${module_name}\" does not supoort osfamily: \"${::osfamily}\"")
