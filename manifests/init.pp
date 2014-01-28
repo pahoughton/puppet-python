@@ -59,26 +59,12 @@ class python {
                         'python3-tools',
                         'python3-setuptools',
                         ]
-        exec { 'install centos pip-3.3' :
-          command => shellquote(
-            '/usr/bin/env',
-            'curl',
-            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py',
-            '|',
-            'python3'),
-          creates => '/usr/bin/pip-3.3',
-          require => Package['python3-setuptools'],
-        }->
-        file { '/usr/bin/pip3' :
-          ensure => 'link',
-          target => '/usr/bin/pip-3.3'
-        }
         exec { 'install centos pip-2.7' :
-          command => shellquote(
-            '/usr/bin/env',
-            'curl',
-            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py',
-            '|',
+          command => concat(
+            '/usr/bin/env ',
+            'curl ',
+            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py ',
+            ' | ',
             'python27'),
           creates => '/usr/bin/pip-2.7',
           require => Package['python27-setuptools'],
@@ -86,6 +72,20 @@ class python {
         file { '/usr/bin/pip27' :
           ensure => 'link',
           target => '/usr/bin/pip-2.7'
+        }
+        exec { 'install centos pip-3.3' :
+          command => concat(
+            '/usr/bin/env ',
+            'curl ',
+            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py ',
+            ' | ',
+            'python3'),
+          creates => '/usr/bin/pip-3.3',
+          require => Package['python3-setuptools'],
+        }->
+        file { '/usr/bin/pip3' :
+          ensure => 'link',
+          target => '/usr/bin/pip-3.3'
         }
       } else {
         $provider = undef
