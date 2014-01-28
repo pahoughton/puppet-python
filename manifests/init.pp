@@ -60,12 +60,7 @@ class python {
                         'python3-setuptools',
                         ]
         exec { 'install centos pip-2.7' :
-          command => concat(
-            '/usr/bin/env ',
-            'curl ',
-            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py ',
-            ' | ',
-            'python27'),
+          command => '/usr/bin/env curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py  | python27',
           creates => '/usr/bin/pip-2.7',
           require => Package['python27-setuptools'],
         }->
@@ -74,12 +69,7 @@ class python {
           target => '/usr/bin/pip-2.7'
         }
         exec { 'install centos pip-3.3' :
-          command => concat(
-            '/usr/bin/env ',
-            'curl ',
-            'https://raw.github.com/pypa/pip/master/contrib/get-pip.py ',
-            ' | ',
-            'python3'),
+          command => '/usr/bin/env curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python3',
           creates => '/usr/bin/pip-3.3',
           require => Package['python3-setuptools'],
         }->
