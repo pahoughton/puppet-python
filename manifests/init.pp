@@ -52,6 +52,7 @@ class python {
           gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puias',
         }
         $provider = undef
+        $pkg_require = Yumrepo['puias']
         $py_packages = ['python27',
                         'python27-tools',
                         'python3',
@@ -69,10 +70,11 @@ class python {
     default: {
       fail("\"${module_name}\" does not supoort osfamily: \"${::osfamily}\"")
     }
-  }->
+  }
   package { $py_packages :
     ensure    => installed,
-    provider  => $provider
+    provider  => $provider,
+    require   => $pkg_requires
   }
 
   case $::lsbdistdescription {
