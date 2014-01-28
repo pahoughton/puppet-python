@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 group :development, :test do
-  gem 'rake','~>10.0.0'
   gem 'bundler'
   gem 'builder','~>3.2.2'
   gem 'puppetlabs_spec_helper', :require => false

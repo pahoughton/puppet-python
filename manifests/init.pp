@@ -89,6 +89,7 @@ class python {
         }
       } else {
         $provider = undef
+        $pkg_require = undef
         $py_packages = ['python27',
                         'py27-pip',
                         'python33',
@@ -138,7 +139,7 @@ class python {
       }
     }
     default : {
-      if $::osfamily ==  'Darwin': {
+      if $::osfamily == 'Darwin' {
         file { '/usr/bin/python' :
           ensure => 'link',
           target => '/opt/local/bin/python2.7'
