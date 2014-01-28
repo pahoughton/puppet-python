@@ -39,7 +39,7 @@ class python {
     }
     'RedHat':{
       if $::operatingsystem == 'CentOS' {
-        notice { 'Installing from PUIAS Repo' : }
+        notify { 'Installing from PUIAS Repo' : }
         file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puias' :
           source => 'puppet:///python/RPM-GPG-KEY-puias',
         }->
