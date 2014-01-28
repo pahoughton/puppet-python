@@ -41,7 +41,7 @@ class python {
       if $::operatingsystem == 'CentOS' {
         notify { 'Installing from PUIAS Repo' : }
         file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puias' :
-          source => 'puppet:///python/RPM-GPG-KEY-puias',
+          source => 'puppet:///modules/python/RPM-GPG-KEY-puias',
         }->
         yumrepo { 'puias' :
           name        => 'PUIAS repo $releasever',
