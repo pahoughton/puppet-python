@@ -54,8 +54,10 @@ class python {
         $pkg_require = Yumrepo['puias']
         $py_packages = ['python27',
                         'python27-tools',
+                        'python27-setuptools',
                         'python3',
                         'python3-tools',
+                        'python3-setuptools',
                         ]
       } else {
         $provider = undef
