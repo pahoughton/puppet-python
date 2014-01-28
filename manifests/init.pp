@@ -60,7 +60,7 @@ class python {
                         'python3-setuptools',
                         ]
         exec { 'install centos pip-2.7' :
-          command => '/usr/bin/env curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py  | python27',
+          command => '/usr/bin/env curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py  | python2.7',
           creates => '/usr/bin/pip-2.7',
           require => Package['python27-setuptools'],
         }->
