@@ -44,7 +44,7 @@ class python {
           source => 'puppet:///modules/python/RPM-GPG-KEY-puias',
         }->
         yumrepo { 'puias' :
-          name        => 'PUIAS repo $releasever',
+          name        => 'puias',
           mirrorlist  => 'http://puias.math.ias.edu/data/puias/computational/$releasever/$basearch/mirrorlist',
           enabled     => 1,
           gpgcheck    => 1,
