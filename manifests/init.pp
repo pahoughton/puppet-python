@@ -28,7 +28,7 @@ class python {
                           'python3',
                           ]
         }
-        default : {
+        default: {
           $py_packages = ['python',
                           'python-pip',
                           'python3',
@@ -37,7 +37,7 @@ class python {
         }
       }
     }
-    'RedHat':{
+    'RedHat': {
       case $::operatingsystem {
         'CentOS' : {
           file { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puias' :
@@ -78,7 +78,7 @@ class python {
             target => '/usr/bin/pip3.3'
           }
         }
-        'Fedora' : {
+        'Fedora': {
           $provider = undef
           $pkg_require = undef
           $py_packages = ['python-pip',
@@ -86,13 +86,13 @@ class python {
                           'python3-pip',
                           ]
         }
-        default : {
+        default: {
           fail("\"${module_name}\" does not supoort os: \"${::operatingsystem}\"")
         }
       }
-      default: {
-        fail("\"${module_name}\" does not supoort osfamily: \"${::osfamily}\"")
-      }
+    }
+    default: {
+      fail("\"${module_name}\" does not supoort osfamily: \"${::osfamily}\"")
     }
   }
   package { $py_packages :
