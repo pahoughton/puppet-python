@@ -1,20 +1,20 @@
 require 'puppet/provider/package/pip'
 
-Puppet::Type.type(:package).provide :pip3,
+Puppet::Type.type(:package).provide :pip27,
   :parent => :pip, :source => :pip do
     
-  desc "Python packages via `pip3`."
+  desc "Python packages via `pip27`."
   
   has_feature :installable, :uninstallable, :upgradeable, :versionable
     
   def self.cmd
     case Facter.value(:osfamily)
     when "RedHat"
-      "pip3"
+      "pip27"
     when "Darwin"
-      "pip3"
+      "pip27"
     else
-      "pip3"
+      "pip27"
     end
   end
 end
