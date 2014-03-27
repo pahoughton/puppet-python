@@ -18,6 +18,7 @@ task :all => :default
 task :tdefault => :texclude
 task :default => [:test]
 
+PuppetLint.configuration.disable_80chars
 PuppetLint.configuration.disable_class_inherits_from_params_class
 PuppetLint.configuration.ignore_paths = FileList[
   '**/fixtures/modules/**/**',
