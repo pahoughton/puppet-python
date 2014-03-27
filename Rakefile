@@ -1,4 +1,8 @@
-# -*- ruby -*-
+# Rakefile - 2013-10-07 08:06
+#
+# Copyright (cc) 2014 Paul Houghton <paul4hough@gmail.com>
+#
+
 require 'rubygems'
 require 'bundler/setup'
 
@@ -23,7 +27,7 @@ PuppetLint.configuration.ignore_paths = FileList[
 # jenkins has a diff build dir name
 if (ENV['BUILD_TAG'] && (ENV['BUILD_TAG'].include? "jenkins"))
   PuppetLint.configuration.disable_autoloader_layout
-  puts "BUILD_TAG: #{ENV['BUILD_TAG']}"  
+  puts "BUILD_TAG: #{ENV['BUILD_TAG']}"
 end
 
 RSpec::Core::RakeTask.new(:test) do |t|
@@ -52,6 +56,6 @@ at_exit do
   end
   if status
     puts "exiting: #{status}"
-    exit status    
+    exit status
   end
 end
