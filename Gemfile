@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 group :development, :test do
   #gem 'bundler'
   #gem 'builder'
+  gem 'rake'
   gem 'rspec-puppet'
   gem 'puppet-lint'
 end
