@@ -1,13 +1,13 @@
 ## puppet-python
 
-Latest: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-homedirs.png)](https://travis-ci.org/pahoughton/puppet-homedirs)
-Master: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-homedirs.png?branch=master)](https://travis-ci.org/pahoughton/puppet-homedirs)
-Test OSX: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-homedirs.png?branch=test-osx)](https://travis-ci.org/pahoughton/puppet-homedirs)
-Test Debian: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-homedirs.png?branch=test-debian)](https://travis-ci.org/pahoughton/puppet-homedirs)
-Devel: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-homedirs.png?branch=test-devel)](https://travis-ci.org/pahoughton/puppet-homedirs)
+Latest: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-python.png)](https://travis-ci.org/pahoughton/puppet-python)
+Master: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-python.png?branch=master)](https://travis-ci.org/pahoughton/puppet-python)
+Test OSX: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-python.png?branch=test-osx)](https://travis-ci.org/pahoughton/puppet-python)
+Test Debian: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-python.png?branch=test-debian)](https://travis-ci.org/pahoughton/puppet-python)
+Devel: [![Test Build Status](https://travis-ci.org/pahoughton/puppet-python.png?branch=test-devel)](https://travis-ci.org/pahoughton/puppet-python)
 
-A Puppet module providing Python and Python3 packages.
-Also provides pipmp and pip3 package providers.
+Provides Python 2.7 and 3.n development packages including pip and
+pip3 providers
 
 ## Usage
 
@@ -52,14 +52,16 @@ Tested on Debian (Ubuntu), Darwin (OSX) and RedHat (Fedora)
       RedHat
         install python nose with pip
         install python3 nose-cover3 with pip3
-    
-## Installs 
-    
+
+## Installs
+
     /usr/bin/python
     /usr/bin/pip
+    /usr/bin/python2
+    /usr/bin/pip2
     /usr/bin/python3
     /usr/bin/pip3
-    
+
 ## Credits and License
 
 Original Author: https://github.com/footballradar/puppet-python

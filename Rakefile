@@ -2,61 +2,62 @@
 #
 # Copyright (cc) 2014 Paul Houghton <paul4hough@gmail.com>
 #
+require 'rake'
+require 'rspec/core/rake_task'
 
-require 'rubygems'
-require 'bundler/setup'
-
-Bundler.require :default
-
-# edit for push runs travis ci testing
-
-require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
-require 'rspec-system/rake_task'
-
-task :all => :default
-task :tdefault => :texclude
-task :default => [:test]
 
 PuppetLint.configuration.disable_80chars
-PuppetLint.configuration.disable_class_inherits_from_params_class
-PuppetLint.configuration.ignore_paths = FileList[
-  '**/fixtures/modules/**/**',
-  'vendor/**/**',
-  ]
+PuppetLint.configuration.disable_class_parameter_defaults
+PuppetLint.configuration.ignore_paths = FileList['**/fixtures/modules/**/**']
 
-# jenkins has a diff build dir name
-if (ENV['BUILD_TAG'] && (ENV['BUILD_TAG'].include? "jenkins"))
-  PuppetLint.configuration.disable_autoloader_layout
-  puts "BUILD_TAG: #{ENV['BUILD_TAG']}"
+desc "Test prep with librarian-puppet"
+task :unittest_prep do
+ sh "
+if [ -d .librarian ] ; then
+  echo updating...
+  librarian-puppet update;
+else
+  echo installing...
+  librarian-puppet install --path=spec/fixtures/modules/;
+fi
+"
 end
 
-RSpec::Core::RakeTask.new(:test) do |t|
-  t.rspec_opts = ['--format=d',
-                  '--out','test.rspec.out']
-  t.pattern = 'spec/{classes,defines,unit,functions,hosts}/**/*_spec.rb'
+desc "Unit tests"
+RSpec::Core::RakeTask.new(:unittest) do |t|
+  t.pattern = 'spec/unit/**/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:test_ignore) do |t|
-  t.rspec_opts = ['--format=d',
-                  '--failure-exit-code=0',
-                  '--out','test.rspec.out']
-  t.pattern = 'spec/{classes,defines,unit,functions,hosts}/**/*_spec.rb'
+desc "Unit tests"
+RSpec::Core::RakeTask.new(:unittest_doc) do |t|
+  t.rspec_opts = ['--format=d']
+  t.pattern = 'spec/unit/**/*_spec.rb'
 end
 
-task :test_ignore => [:lint,:spec_prep] do
+desc "Unit-suite tests w/o doc"
+RSpec::Core::RakeTask.new(:unittest_nodoc) do |t|
+  t.pattern = 'spec/unit-suite/**/*_spec.rb'
 end
 
-task :test => [:lint,:spec_prep]
+desc "Unit tests"
+RSpec::Core::RakeTask.new(:unittest_suite) do |t|
+  t.rspec_opts = ['--format=d']
+  t.pattern = 'spec/unit-suite/**/*_spec.rb'
+end
 
-at_exit do
-  status= $!.is_a?(::SystemExit) ? $!.status : nil
-  if File.exist?('test.rspec.out')
-    ofile = File.open('test.rspec.out','r')
-    puts ofile.read
-  end
-  if status
-    puts "exiting: #{status}"
-    exit status
-  end
+desc "Unit-suite tests w/ doc"
+RSpec::Core::RakeTask.new(:unittest_fulldoc) do |t|
+  t.rspec_opts = ['--format=d','--out=unittest-suite-results.txt']
+  t.pattern = 'spec/unit-suite/**/*_spec.rb'
+end
+
+desc "Generate test results markdown"
+task :unittest_md => [:unittest_fulldoc] do
+  sh "outfn=unittest-suite-results.md;
+echo '## 'Unit test results - `date` > $outfn;
+echo '```' >> $outfn;
+cat unittest-suite-results.txt >> $outfn;
+echo '```' >> $outfn;
+"
 end

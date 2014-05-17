@@ -1,17 +1,17 @@
-language: c
+# .travis.yml - 2013-10-07 07:14
+#
+# Copyright (c) 2014 Paul Houghton <paul4hough@gmail.com>
+
+language: ruby
 notifications:
   email:
     - paul4hough@gmail.com
 
-install:
-  - sudo apt-get update
-  - sudo apt-get install ruby-full
-  - gem install bundler
-  
-before_script:
-  - echo -e "Host heroku.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-
-script:
-  - bundle install
-  - rake -t test
+rvm:
+ - 1.9.3
+ - 2.0.0
+env:
+  matrix:
+  - PUPPET_GEM_VERSION="~> 3.4.3"
+  - PUPPET_GEM_VERSION="~> 3.5.1"
+script: "bundle exec rake -t lint unittest_prep unittest_suite"

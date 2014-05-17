@@ -3,3 +3,6 @@
 /build
 test*out
 Gemfile.lock
+.librarian/
+.tmp/
+Puppetfile.lock
