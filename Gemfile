@@ -4,6 +4,7 @@ group :development, :test do
   #gem 'bundler'
   #gem 'builder'
   gem 'rake'
+  gem 'librarian-puppet'
   gem 'rspec-puppet'
   gem 'puppet-lint'
 end
